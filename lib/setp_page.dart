@@ -364,7 +364,7 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
                 style: const TextStyle(color: Colors.black),
                 children: [
                   const TextSpan(
-                    text: '该步骤为配置腾讯云API调用所必须的参数，配置完成后才能创建用户，创建课堂等。',
+                    text: '请注意腾讯云API的密钥等信息需根据业务放到您的服务端，避免泄漏。',
                   ),
                   TextSpan(
                     text: '点击查看文档',
