@@ -13,6 +13,7 @@ import path_provider_foundation
 import shared_preferences_foundation
 import tencent_cloud_chat_sdk
 import tencent_rtc_sdk
+import url_launcher_macos
 import wakelock_plus
 import zstandard_macos
 
@@ -25,6 +26,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
   TencentCloudChatSdkPlugin.register(with: registry.registrar(forPlugin: "TencentCloudChatSdkPlugin"))
   TencentRTCCloud.register(with: registry.registrar(forPlugin: "TencentRTCCloud"))
+  UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
   WakelockPlusMacosPlugin.register(with: registry.registrar(forPlugin: "WakelockPlusMacosPlugin"))
   ZstandardMacosPlugin.register(with: registry.registrar(forPlugin: "ZstandardMacosPlugin"))
 }
