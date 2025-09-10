@@ -10,13 +10,14 @@ class ClassroomSetupWizardPage extends StatefulWidget {
   const ClassroomSetupWizardPage({Key? key}) : super(key: key);
 
   @override
-  State<ClassroomSetupWizardPage> createState() => _ClassroomSetupWizardPageState();
+  State<ClassroomSetupWizardPage> createState() =>
+      _ClassroomSetupWizardPageState();
 }
 
 class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
   // 常量定义
   static const int _totalSteps = 3;
-  static const String _documentationUrl = 
+  static const String _documentationUrl =
       'https://cloud.tencent.com/document/product/1639/79895#9b6257f6-95c7-4f5d-9eee-76edd86f80f7';
 
   // 当前步骤状态
@@ -35,6 +36,19 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
 
   // 用户和课堂信息
   ClassroomInfo? _classroomInfo;
+
+  // 课堂列表
+  List<dynamic> _classroomList = [];
+  int? _selectedClassroomIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    // 可以在这里预设默认参数
+    _secretKeyController.text = "";
+    _secretIdController.text = "";
+    _appIdController.text = "";
+  }
 
   @override
   void dispose() {
@@ -124,9 +138,8 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
           style: TextStyle(
             fontSize: 12,
             color: isPassed || isCurrentStep ? Colors.black : Colors.grey[600],
-            fontWeight: isPassed || isCurrentStep
-                ? FontWeight.bold
-                : FontWeight.normal,
+            fontWeight:
+                isPassed || isCurrentStep ? FontWeight.bold : FontWeight.normal,
           ),
         ),
       ],
@@ -165,19 +178,15 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
       children: [
         const StepTitle('步骤 1: 配置参数'),
         const SizedBox(height: 20),
-        const Text('请从腾讯云控制台获取必要的信息并填写：', 
-            style: TextStyle(fontSize: 16)),
+        const Text('请从腾讯云控制台获取必要的信息并填写：', style: TextStyle(fontSize: 16)),
         const SizedBox(height: 30),
-        
         _buildConfigurationForm(),
         const SizedBox(height: 30),
-        
         _buildActionButton(
           text: '创建用户',
           onPressed: _isProcessing ? null : _handleConfiguration,
           isLoading: _isProcessing,
         ),
-        
         const SizedBox(height: 30),
         _buildDocumentationTip(),
       ],
@@ -194,14 +203,12 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
           icon: Icons.key,
         ),
         const SizedBox(height: 16),
-        
         _buildTextField(
           controller: _secretIdController,
           label: '腾讯云API Secret ID',
           icon: Icons.perm_identity,
         ),
         const SizedBox(height: 16),
-        
         _buildTextField(
           controller: _appIdController,
           label: '互动课堂 App ID',
@@ -237,13 +244,10 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
       children: [
         const StepTitle('步骤 2: 创建课堂'),
         const SizedBox(height: 20),
-        const Text('配置已完成，现在可以创建课堂。', 
-            style: TextStyle(fontSize: 16)),
+        const Text('配置已完成，现在可以创建课堂。', style: TextStyle(fontSize: 16)),
         const SizedBox(height: 30),
-
         _buildSuccessIndicator('用户已创建成功'),
         const SizedBox(height: 30),
-
         _buildActionRow(
           primaryAction: ActionButton(
             text: '创建课堂',
@@ -267,21 +271,22 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
       children: [
         const StepTitle('步骤 3: 进入课堂'),
         const SizedBox(height: 20),
-        const Text('课堂已创建成功，现在可以进入课堂。', 
-            style: TextStyle(fontSize: 16)),
+        const Text('请选择要进入的课堂：', style: TextStyle(fontSize: 16)),
         const SizedBox(height: 30),
-
-        _buildClassroomInfoCard(),
-        const SizedBox(height: 30),
-
+        if (_classroomList.isEmpty)
+          _buildClassroomInfoCard()
+        else
+          _buildClassroomList(),
+        const SizedBox(height: 20),
         _buildActionRow(
           primaryAction: ActionButton(
             text: '进入课堂',
-            onPressed: _handleEnterClassroom,
+            onPressed:
+                _selectedClassroomIndex != null ? _handleEnterClassroom : null,
           ),
           secondaryAction: ActionButton(
-            text: '重置',
-            onPressed: _showResetConfirmDialog,
+            text: '刷新列表',
+            onPressed: _isProcessing ? null : _loadClassroomList,
             isOutlined: true,
           ),
         ),
@@ -321,6 +326,56 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
         const SizedBox(width: 12),
         Expanded(
           child: Text(text, overflow: TextOverflow.ellipsis),
+        ),
+      ],
+    );
+  }
+
+  /// 构建课堂列表
+  Widget _buildClassroomList() {
+    return Column(
+      children: [
+        Text(
+          '共找到 ${_classroomList.length} 个课堂',
+          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+        ),
+        const SizedBox(height: 16),
+        SizedBox(
+          height: 300,
+          child: ListView.builder(
+            itemCount: _classroomList.length,
+            itemBuilder: (context, index) {
+              final classroom = _classroomList[index];
+              final isSelected = _selectedClassroomIndex == index;
+
+              return Card(
+                color: isSelected ? Colors.blue[50] : null,
+                elevation: 2,
+                margin: const EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.school,
+                    color: isSelected ? Colors.blue : Colors.grey,
+                  ),
+                  title: Text(
+                    classroom['Name'] ?? '未命名课堂',
+                    style: TextStyle(
+                      fontWeight:
+                          isSelected ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '课堂ID: ${classroom['RoomId']}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  trailing: isSelected
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : null,
+                  onTap: () => _handleClassroomSelection(index),
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
@@ -453,7 +508,7 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
     await _executeWithLoading(() async {
       _configureApiClient();
       final response = await TCICCloudApi.registerUser();
-      
+
       if (_hasApiError(response)) {
         _showErrorMessage('注册失败，${_getErrorMessage(response)}');
         return;
@@ -470,7 +525,7 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
 
     await _executeWithLoading(() async {
       final response = await TCICCloudApi.createRoom(teacherId: info.userId);
-      
+
       if (_hasApiError(response)) {
         _showErrorMessage('创建课堂失败，${_getErrorMessage(response)}');
         return;
@@ -531,6 +586,8 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
       _stepStatus.reset();
       _isProcessing = false;
       _classroomInfo = null;
+      _classroomList = [];
+      _selectedClassroomIndex = null;
 
       // 清空表单
       _secretKeyController.clear();
@@ -542,6 +599,42 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
   }
 
   // ==================== 辅助方法 ====================
+
+  /// 加载课堂列表
+  Future<void> _loadClassroomList() async {
+    await _executeWithLoading(() async {
+      try {
+        final response = await TCICCloudApi.getClassroomList();
+        if (_hasApiError(response)) {
+          _showErrorMessage('创建课堂失败，${_getErrorMessage(response)}');
+          return;
+        }
+        _handleClassRoomGetSuccess(response);
+      } catch (e) {
+        _showErrorMessage('获取课堂列表失败: $e');
+      }
+    });
+  }
+
+  /// 处理课堂创建成功
+  void _handleClassRoomGetSuccess(Map<String, dynamic> response) {
+    final responseInfo = response["Response"];
+
+    setState(() {
+      _classroomList = responseInfo['Rooms'];
+    });
+  }
+
+  /// 处理课堂选择
+  void _handleClassroomSelection(int index) {
+    setState(() {
+      _selectedClassroomIndex = index;
+      final classroom = _classroomList[index];
+      _classroomInfo = _classroomInfo?.copyWith(
+        roomId: classroom['RoomId'],
+      );
+    });
+  }
 
   /// 验证配置输入
   bool _validateConfigurationInputs() {
@@ -566,7 +659,7 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
   /// 处理配置成功
   void _handleConfigurationSuccess(Map<String, dynamic> response) {
     final responseInfo = response["Response"];
-    
+
     setState(() {
       _stepStatus.isConfigurationCompleted = true;
       _currentStepIndex = 1;
@@ -583,16 +676,18 @@ class _ClassroomSetupWizardPageState extends State<ClassroomSetupWizardPage> {
   /// 处理课堂创建成功
   void _handleClassroomCreationSuccess(Map<String, dynamic> response) {
     final responseInfo = response["Response"];
-    
+
     setState(() {
       _stepStatus.isClassroomCreated = true;
       _currentStepIndex = 2;
       _classroomInfo = _classroomInfo?.copyWith(
         roomId: responseInfo['RoomId'],
       );
+      _selectedClassroomIndex = null;
     });
 
     _showSuccessMessage('课堂创建成功！');
+    _loadClassroomList();
   }
 
   /// 执行带加载状态的操作
