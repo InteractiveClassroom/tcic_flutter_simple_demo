@@ -7,15 +7,17 @@
 #include "generated_plugin_registrant.h"
 
 #include <flutter_inappwebview_windows/flutter_inappwebview_windows_plugin_c_api.h>
+#include <gal/gal_plugin_c_api.h>
 #include <permission_handler_windows/permission_handler_windows_plugin.h>
 #include <tencent_cloud_chat_sdk/tencent_cloud_chat_sdk_plugin_c_api.h>
 #include <tencent_rtc_sdk/trtc_plugin_c_api.h>
 #include <url_launcher_windows/url_launcher_windows.h>
-#include <zstandard_windows/zstandard_windows_plugin_c_api.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   FlutterInappwebviewWindowsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterInappwebviewWindowsPluginCApi"));
+  GalPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("GalPluginCApi"));
   PermissionHandlerWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("PermissionHandlerWindowsPlugin"));
   TencentCloudChatSdkPluginCApiRegisterWithRegistrar(
@@ -24,6 +26,4 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("TrtcPluginCApi"));
   UrlLauncherWindowsRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("UrlLauncherWindows"));
-  ZstandardWindowsPluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("ZstandardWindowsPluginCApi"));
 }

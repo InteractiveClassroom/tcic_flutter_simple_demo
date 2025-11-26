@@ -4,11 +4,11 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   flutter_inappwebview_windows
+  gal
   permission_handler_windows
   tencent_cloud_chat_sdk
   tencent_rtc_sdk
   url_launcher_windows
-  zstandard_windows
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

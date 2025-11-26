@@ -198,14 +198,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_floating:
-    dependency: transitive
-    description:
-      name: flutter_floating
-      sha256: "18adb4ad3215f06c043dc08c4c5ebdec6913a25bcb14f8f27a700686a6588ea0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.2"
   flutter_foreground_task:
     dependency: transitive
     description:
@@ -279,7 +271,7 @@ packages:
     source: hosted
     version: "0.6.0"
   flutter_lints:
-    dependency: "direct dev"
+    dependency: "direct overridden"
     description:
       name: flutter_lints
       sha256: "5398f14efa795ffb7a33e9b6a08798b26a180edac4ad7db3f231e40f82ce11e1"
@@ -294,6 +286,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.29"
+  flutter_screen_recording:
+    dependency: transitive
+    description:
+      name: flutter_screen_recording
+      sha256: "43bcb17ccee1ad3249cf2eae05e1f39d0380a937e5012c18df28a7b71ed46eb6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.24"
+  flutter_screen_recording_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_screen_recording_platform_interface
+      sha256: "9e07f78a2529bc5b6c77d045b392ed4062445543613fcad431c4cc1da57558d7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
+  flutter_screen_recording_web:
+    dependency: transitive
+    description:
+      name: flutter_screen_recording_web
+      sha256: bb19b3875e0d8ddfe009ed42086339f8016df05e685c37ff06cb56e165f2f7fa
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.8"
   flutter_screenutil:
     dependency: transitive
     description:
@@ -328,6 +344,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  gal:
+    dependency: transitive
+    description:
+      name: gal
+      sha256: "969598f986789127fd407a750413249e1352116d4c2be66e81837ffeeaafdfee"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
   get:
     dependency: transitive
     description:
@@ -369,13 +393,13 @@ packages:
     source: hosted
     version: "0.20.2"
   js:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: "53385261521cc4a0c4658fd0ad07a7d14591cf8fc33abbceae306ddb974888dc"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.2"
   json_annotation:
     dependency: transitive
     description:
@@ -396,26 +420,26 @@ packages:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: "6bb818ecbdffe216e81182c2f0714a2e62b593f4a4f13098713ff1685dfb6ab0"
+      sha256: "33e2e26bdd85a0112ec15400c8cbffea70d0f9c3407491f672a2fad47915e2de"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.9"
+    version: "11.0.2"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
       name: leak_tracker_flutter_testing
-      sha256: f8b613e7e6a13ec79cfdc0e97638fddb3ab848452eff057653abd3edba760573
+      sha256: "1dbc140bb5a23c75ea9c4811222756104fbcd1a27173f0c34ca01e16bea473c1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.9"
+    version: "3.0.10"
   leak_tracker_testing:
     dependency: transitive
     description:
       name: leak_tracker_testing
-      sha256: "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3"
+      sha256: "8d5a2d49f4a66b49744b23b018848400d23e54caf9463f4eb20df3eb8acb2eb1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   lints:
     dependency: transitive
     description:
@@ -424,14 +448,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
-  live_flutter_plugin:
-    dependency: transitive
-    description:
-      name: live_flutter_plugin
-      sha256: d214575ffc1794c268cef329ee0855b8f2c7502d7c5c9c19743abe2af3540a40
-      url: "https://pub.dev"
-    source: hosted
-    version: "12.6.0"
   logger:
     dependency: transitive
     description:
@@ -640,6 +656,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.15.0"
+  pip:
+    dependency: transitive
+    description:
+      name: pip
+      sha256: f3c0890458a1e7ea3597fd2432841fb82565d66e4aa5b4931326a2ec052b3505
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   platform:
     dependency: transitive
     description:
@@ -809,10 +833,18 @@ packages:
     dependency: "direct main"
     description:
       name: tcic_client_ui
-      sha256: "0dac5c791f446dddd20d609e79f0873477eb3f609e5bf15b0b614866088559d9"
+      sha256: "8de88175f00d939c7602be5b7ccf6d15a10a6ab61e33c83ff0d1d18324e125ed"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.8-beta.4"
+  tcic_native_plugin:
+    dependency: transitive
+    description:
+      name: tcic_native_plugin
+      sha256: cd86c5c417e424801e651782dc6bf1f4db15519d940e84e60aa8aeddf6d4a0e5
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   tencent_cloud_chat_sdk:
     dependency: transitive
     description:
@@ -825,26 +857,26 @@ packages:
     dependency: transitive
     description:
       name: tencent_cloud_whiteboard
-      sha256: dd4b179091e838a7c0b376f60c5f4e74472debcb64345c01878278b72cba08f1
+      sha256: "691c4f3e9d37edfd5f7bd30f86c11b4094954a3e11ae1440370dc91102ac90ad"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.6-beta.2"
   tencent_rtc_sdk:
     dependency: transitive
     description:
       name: tencent_rtc_sdk
-      sha256: df2642d6f3a3d7d4190a6afd4190a1772f8b128a8ab147a042c4879328ceecd1
+      sha256: "877ca7c5659d0e6a05dd1fad2861903bf73a4d7ed746d8299bfbe44656b09fd6"
       url: "https://pub.dev"
     source: hosted
-    version: "12.6.2"
+    version: "12.8.3-prerelease"
   tencentcloud_cls_sdk_dart_producer:
     dependency: transitive
     description:
       name: tencentcloud_cls_sdk_dart_producer
-      sha256: "924fafbc7d40b2b01ca15da9a47d5651c3765abcfe02472b8433bfd7a936e08d"
+      sha256: "0f3fbcc800b6649253a9030210dfb43f2b187d1cac680f25c905dd900f3e0eaf"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.6"
   tencentcloud_cos_sdk_plugin_nobeacon:
     dependency: transitive
     description:
@@ -865,10 +897,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: fb31f383e2ee25fbbfe06b40fe21e1e458d14080e3c67e7ba0acfde4df4e0bbd
+      sha256: "522f00f556e73044315fa4585ec3270f1808a4b186c936e612cab0b565ff1e00"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.4"
+    version: "0.7.6"
   toastification:
     dependency: transitive
     description:
@@ -985,10 +1017,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
+      sha256: d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.2.0"
   vm_service:
     dependency: transitive
     description:
@@ -1053,70 +1085,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.6.1"
-  zstandard:
-    dependency: transitive
-    description:
-      name: zstandard
-      sha256: f1635a33fedc97ea4140fb7f41ae0f591f23c171079ed1054a2a99423bbb21cd
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
-  zstandard_android:
-    dependency: transitive
-    description:
-      name: zstandard_android
-      sha256: e345f280c23fa6d679797a7c5ad93862f02109ee3039b27262a82af574abae23
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
-  zstandard_ios:
-    dependency: transitive
-    description:
-      name: zstandard_ios
-      sha256: "824319352d9a88259e43a8e344b9ef4db54cf09cd6053792563a8ad9257e38f9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
-  zstandard_linux:
-    dependency: transitive
-    description:
-      name: zstandard_linux
-      sha256: "65bf0d25e7e930866615b9a22c16ad36603b6800f8030fcd5538b2f1ce8c6ac0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
-  zstandard_macos:
-    dependency: transitive
-    description:
-      name: zstandard_macos
-      sha256: "876a9eaacbf4a94392e8514b56305c1b6bea042dd17891e7527a7c859a3ab984"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
-  zstandard_platform_interface:
-    dependency: transitive
-    description:
-      name: zstandard_platform_interface
-      sha256: "0b82c4a43552eccc92033a6504ab2ac442d9456f20132b08296bafd41a807e2f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
-  zstandard_web:
-    dependency: transitive
-    description:
-      name: zstandard_web
-      sha256: a72a265fd5f1092ff916e49fa7669c306dbaf161454780d446f88e626d55804c
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
-  zstandard_windows:
-    dependency: transitive
-    description:
-      name: zstandard_windows
-      sha256: "2095eae95f774973088fcbddc094a4ed11d2cac6d731911c987a0c06e743dddd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.27"
 sdks:
   dart: ">=3.8.1 <4.0.0"
   flutter: ">=3.29.0"
